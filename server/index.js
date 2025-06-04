@@ -23,11 +23,7 @@ app.use(express.json());
 const connectDB = async () => {
   try {
     await mongoose.connect(
-      process.env.MONGO_URI || 'mongodb://localhost:27017/restaurant-order-system',
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      }
+      process.env.MONGO_URI || 'mongodb://localhost:27017/restaurant-order-system'
     );
     console.log('MongoDB connected successfully');
 
