@@ -22,9 +22,15 @@ app.use(express.json());
 // Database connection
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/restaurant-order-system');
+    console.log(
+      'Connecting to MongoDB...',
+      process.env.MONGO_URI || 'mongodb://localhost:27017/restaurant-order-system'
+    );
+    await mongoose.connect(
+      process.env.MONGO_URI || 'mongodb://localhost:27017/restaurant-order-system'
+    );
     console.log('MongoDB connected successfully');
-    
+
     // Seed database with initial data if needed
     if (process.env.SEED_DATABASE === 'true') {
       await seedDatabase();
