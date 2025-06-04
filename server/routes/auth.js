@@ -38,7 +38,7 @@ router.post(
       let company = null;
       if (role === 'company' && companyName) {
         company = await Company.findOne({ name: companyName });
-        
+
         if (!company) {
           company = new Company({
             name: companyName,
@@ -69,7 +69,7 @@ router.post(
 
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-      res.json({ 
+      res.json({
         token,
         user: {
           id: user.id,
@@ -124,7 +124,7 @@ router.post(
 
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-      res.json({ 
+      res.json({
         token,
         user: {
           id: user.id,
@@ -146,10 +146,8 @@ router.post(
 // @access  Private
 router.get('/user', authenticate, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id)
-      .select('-password')
-      .populate('company', 'name');
-    
+    const user = await User.findById(req.user.id).select('-password').populate('company', 'name');
+
     res.json({
       id: user.id,
       name: user.name,
